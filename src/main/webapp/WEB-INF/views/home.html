@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <style>
-    table,th,td{
+    table, th, td {
         border: 1px solid;
     }
 </style>
@@ -20,13 +20,40 @@
         <th colspan="2">activities</th>
     </tr>
     <tr th:each="row : ${city}">
-        <td th:text="${row.id}"></td>
+        <td th:text="${row.id}" id="id"></td>
         <td><a href="" th:text="${row.nameCity}" th:href="@{/{id}/view(id=${row.getId()})}"></a></td>
         <td th:text="${row.country}"></td>
         <td><a href="" th:href="@{/{id}/update(id=${row.getId()})}">update</a></td>
-        <td><a href="" th:href="@{/{id}/delete(id=${row.getId()})}">delete</a></td>
+        <td><a href="" th:href="@{/{id}/delete(id=${row.getId()})}" id="Delete-link">delete</a></td>
     </tr>
 </table>
 <span th:text="${msg}" style="color: green"></span>
+<div class="confirmation-dialog" id="confirmation-deleteW" style="display: none">
+    <div class="confirmation-dialog-content">
+        <h2>Confirm deletion</h2>
+        <p>Do you want to delete ?</p>
+        <button id="confirm-De">Yes</button>
+        <button id="cancel-De">Cancel</button>
+    </div>
+</div>
+<script>
+    const DeleteLink = document.getElementById('Delete-link');
+    const confirmationDelete = document.getElementById('confirmation-deleteW');
+    const confirmDelete = document.getElementById('confirm-De');
+    const cancelDelete = document.getElementById('cancel-De');
+    let id = document.getElementById('id');
+
+    DeleteLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        confirmationDelete.style.display = 'block';
+    });
+    confirmDelete.addEventListener('click', function () {
+        confirmationDelete.style.display = 'none';
+        window.location.href = `${id.innerHTML}/delete`
+    });
+    cancelDelete.addEventListener('click', function () {
+        confirmationDelete.style.display = 'none';
+    });
+</script>
 </body>
 </html>
