@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>Information</h1>
+    name: <label th:text="${city.nameCity}"></label>
+    <p></p>
+    country: <label th:text="${city.country}"></label>
+    <p></p>
+    area: <label th:text="${city.area}"></label>
+    <p></p>
+    population: <label th:text="${city.population}"></label>
+    <p></p>
+    GDP: <label th:text="${city.GDP}"></label>
+    <p></p>
+    describe: <label th:text="${city.describe}"></label>
+    <p></p>
+    <a href="" th:href="@{/home}">back</a>
+    <a href="" th:href="@{/{id}/update(id=${city.getId()})}">update</a>
+    <a href="" th:href="@{/{id}/delete(id=${city.getId()})}">delete</a>
+</div>
+</body>
+</html>
