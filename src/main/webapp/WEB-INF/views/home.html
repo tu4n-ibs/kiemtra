@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <head th:replace="/layout :: head">
 </head>
-<style>
-    table, th, td {
-        border: 1px solid;
-    }
-</style>
 <body>
 <h1>Home</h1>
 <a href="" th:href="@{/create}">add</a>
-<table>
+<table id = "customers">
     <tr>
         <th>id</th>
         <th>thanh pho</th>
@@ -28,7 +24,7 @@
     </tr>
 </table>
 <span th:text="${msg}" style="color: green"></span>
-<div class="confirmation-dialog" id="confirmation-deleteW" style="display: none">
+<div class="confirmation-dialog" id="confirmation-deleteW" style="display: none;border: 1px solid;text-align: center;width: 400px;padding: 20px;margin: auto;margin-top: 20px">
     <div class="confirmation-dialog-content">
         <h2>Confirm deletion</h2>
         <p>Do you want to delete ?</p>
@@ -41,7 +37,7 @@
     const confirmationDelete = document.getElementById('confirmation-deleteW');
     const confirmDelete = document.getElementById('confirm-De');
     const cancelDelete = document.getElementById('cancel-De');
-    let id = document.getElementById('id');
+    let id = document.getElementById('id').innerHTML;
 
     DeleteLink.addEventListener('click', function (event) {
         event.preventDefault();
@@ -49,11 +45,12 @@
     });
     confirmDelete.addEventListener('click', function () {
         confirmationDelete.style.display = 'none';
-        window.location.href = `${id.innerHTML}/delete`
+        window.location.href = `${id}/delete`
     });
     cancelDelete.addEventListener('click', function () {
         confirmationDelete.style.display = 'none';
     });
 </script>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <body>
 <h1>update Form</h1>
 <form action="" method="post" th:action="@{/edit}" th:object="${city}">
-    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{id}" id="id">
     <input type="text" th:field="*{nameCity}">
     <p></p>
     <input type="text" th:field="*{country}">
@@ -22,6 +22,7 @@
     <p></p>
     <input type="submit" value="update"><p></p>
 </form>
+<p th:each="row : ${listErr}" th:text="${row.getDefaultMessage()}"></p>
 <a href="" th:href="@{/home}">back</a>
 <p></p>
 </body>

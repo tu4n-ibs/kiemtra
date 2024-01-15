@@ -1,18 +1,25 @@
 package org.example.kiemtraspringmvc.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class thanhPho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "ban phai nhap ten")
     private String nameCity;
+    @NotBlank(message = "ban phai chon quoc gia")
     private String country;
+    @Min(value = 0, message = "ban phai nhap dien tich")
     private double area;
+    @NotBlank(message = "ban phai nhap dan so")
     private String population;
+    @NotBlank(message = "ban phai nhap GDP")
     private String GDP;
-
+    @NotBlank(message = "Ban phai nhap mo ta")
     private String descri;
 
     public thanhPho() {
@@ -36,7 +43,6 @@ public class thanhPho {
         this.id = id;
     }
 
-    @Column(length = 100, nullable = false)
     public String getNameCity() {
         return nameCity;
     }
@@ -45,7 +51,6 @@ public class thanhPho {
         this.nameCity = nameCity;
     }
 
-    @Column(length = 100, nullable = false)
     public String getCountry() {
         return country;
     }
@@ -54,7 +59,7 @@ public class thanhPho {
         this.country = country;
     }
 
-    @Column(nullable = false)
+
     public double getArea() {
         return area;
     }
@@ -63,15 +68,16 @@ public class thanhPho {
         this.area = area;
     }
 
-    @Column(length = 50, nullable = false)
+
     public String getPopulation() {
         return population;
     }
+
     public void setPopulation(String population) {
         this.population = population;
     }
 
-    @Column(length = 10, nullable = false)
+
     public String getGDP() {
         return GDP;
     }
@@ -80,7 +86,7 @@ public class thanhPho {
         this.GDP = GDP;
     }
 
-    @Column(length = 255, nullable = false)
+
     public String getDescribe() {
         return descri;
     }

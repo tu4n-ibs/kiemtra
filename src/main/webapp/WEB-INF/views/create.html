@@ -7,26 +7,23 @@
 <body>
 <h1>create Form</h1>
 <form action="" method="post" th:action="@{/save}" th:object="${cityForm}">
-  name:  <input type="text" placeholder="name" th:field="*{nameCity}">
+    name: <input type="text" placeholder="name" th:field="*{nameCity}">
     <p></p>
-  dien tich:  <input type="text" placeholder="area" th:field="*{area}">
+    dien tich: <input type="text" placeholder="area" th:field="*{area}">
     <p></p>
-  dan so:  <input type="text" placeholder="dan so" th:field="*{population}">
+    dan so: <input type="text" placeholder="dan so" th:field="*{population}">
     <p></p>
-  GDP:  <input type="text" placeholder="gdp" th:field="*{GDP}">
+    GDP: <input type="text" placeholder="gdp" th:field="*{GDP}">
     <p></p>
-  mo ta:  <textarea th:field="*{describe}"></textarea>
+    mo ta: <textarea th:field="*{describe}"></textarea>
     <p></p>
-  quoc gia:  <select th:field="*{country}">select
-        <option value="viet nam">viet nam</option>
-        <option value="japan">japan</option>
-        <option value="china">china</option>
-        <option value="anh">anh</option>
-        <option value="phap">phap</option>
-        <option value="duc">duc</option>
-    </select>
+    quoc gia: <select th:field="*{country}">
+    <option th:each="co : ${listCountry}" th:text="${co.name}" th:value="${co.name}"></option>
+</select>
     <p></p>
-    <input type="submit" value="save"><p></p>
+    <input type="submit" value="save">
+    <p></p>
+    <p th:each="row : ${listErr}" th:text="${row.getDefaultMessage()}"></p>
 </form>
 <a href="" th:href="@{/home}">back</a>
 <p></p>

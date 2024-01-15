@@ -7,6 +7,7 @@
 <body>
 <div>
     <h1>Information</h1>
+   <label th:text="${city.id}" id="id" hidden="hidden"></label>
     name: <label th:text="${city.nameCity}"></label>
     <p></p>
     country: <label th:text="${city.country}"></label>
@@ -21,7 +22,34 @@
     <p></p>
     <a href="" th:href="@{/home}">back</a>
     <a href="" th:href="@{/{id}/update(id=${city.getId()})}">update</a>
-    <a href="" th:href="@{/{id}/delete(id=${city.getId()})}">delete</a>
+    <a href="" th:href="@{/{id}/delete(id=${city.getId()})}" id="Delete-link">delete</a>
 </div>
+<div class="confirmation-dialog" id="confirmation-deleteW" style="display: none;border: 1px solid;text-align: center;width: 400px;padding: 20px;margin: auto;margin-top: 20px">
+    <div class="confirmation-dialog-content">
+        <h2>Confirm deletion</h2>
+        <p>Do you want to delete ?</p>
+        <button id="confirm-De">Yes</button>
+        <button id="cancel-De">Cancel</button>
+    </div>
+</div>
+<script>
+    const DeleteLink = document.getElementById('Delete-link');
+    const confirmationDelete = document.getElementById('confirmation-deleteW');
+    const confirmDelete = document.getElementById('confirm-De');
+    const cancelDelete = document.getElementById('cancel-De');
+    let id = document.getElementById('id');
+
+    DeleteLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        confirmationDelete.style.display = 'block';
+    });
+    confirmDelete.addEventListener('click', function () {
+        confirmationDelete.style.display = 'none';
+        window.location.href = `delete`
+    });
+    cancelDelete.addEventListener('click', function () {
+        confirmationDelete.style.display = 'none';
+    });
+</script>
 </body>
 </html>
