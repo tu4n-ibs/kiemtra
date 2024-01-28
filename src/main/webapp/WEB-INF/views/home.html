@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <head th:replace="/layout :: head">
-</head>
+    </head>
 <body>
 <h1>Home</h1>
 <a href="" th:href="@{/create}">add</a>
-<table id = "customers">
+<form action="" th:action="@{/search}" method="get">
+    <input type="text" name="search" placeholder="search">
+    <input type="submit" value="search">
+</form>
+<table id="customers">
     <tr>
         <th>id</th>
         <th>thanh pho</th>
@@ -20,36 +24,36 @@
         <td><a href="" th:text="${row.nameCity}" th:href="@{/{id}/view(id=${row.getId()})}"></a></td>
         <td th:text="${row.country}"></td>
         <td><a href="" th:href="@{/{id}/update(id=${row.getId()})}">update</a></td>
-        <td><a href="" th:href="@{/{id}/delete(id=${row.getId()})}" id="Delete-link">delete</a></td>
+        <td id="display-form" style="cursor: pointer">delete</td>
     </tr>
 </table>
 <span th:text="${msg}" style="color: green"></span>
-<div class="confirmation-dialog" id="confirmation-deleteW" style="display: none;border: 1px solid;text-align: center;width: 400px;padding: 20px;margin: auto;margin-top: 20px">
+<div class="confirmation-dialog" id="confirm" style="display: none;border: 1px solid;text-align: center;width: 400px;padding: 20px;margin: auto;margin-top: 20px">
     <div class="confirmation-dialog-content">
         <h2>Confirm deletion</h2>
         <p>Do you want to delete ?</p>
-        <button id="confirm-De">Yes</button>
-        <button id="cancel-De">Cancel</button>
+        <button id="delete">Yes</button>
+        <button id="cancel">Cancel</button>
     </div>
 </div>
 <script>
-    const DeleteLink = document.getElementById('Delete-link');
-    const confirmationDelete = document.getElementById('confirmation-deleteW');
-    const confirmDelete = document.getElementById('confirm-De');
-    const cancelDelete = document.getElementById('cancel-De');
-    let id = document.getElementById('id').innerHTML;
-
-    DeleteLink.addEventListener('click', function (event) {
-        event.preventDefault();
-        confirmationDelete.style.display = 'block';
-    });
-    confirmDelete.addEventListener('click', function () {
-        confirmationDelete.style.display = 'none';
-        window.location.href = `${id}/delete`
-    });
-    cancelDelete.addEventListener('click', function () {
-        confirmationDelete.style.display = 'none';
-    });
+    let cancel = document.getElementById('cancel')
+    let confirm = document.getElementById('confirm')
+    document.querySelectorAll('#display-form').forEach(e => {
+        e.addEventListener('click', function (event) {
+            confirm.style.display = 'block';
+        });
+    })
+    document.querySelectorAll('#delete').forEach(e => {
+        e.addEventListener('click', function (ev) {
+            document.querySelectorAll('#id').forEach(e => {
+                window.location.href = `${e.innerHTML}/delete`
+            })
+        })
+    })
+    cancel.addEventListener('click', function (ev) {
+        confirm.style.display = 'none'
+    })
 </script>
 <footer th:replace="/layout :: footer"></footer>
 </body>

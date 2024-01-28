@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -34,7 +35,7 @@ public class HomeController {
     public ModelAndView createForm() {
         ModelAndView modelAndView = new ModelAndView("create");
         modelAndView.addObject("cityForm", new thanhPho());
-        modelAndView.addObject("listCountry", quocGiaRepository.findAll());modelAndView.addObject("cityForm", new thanhPho());modelAndView.addObject("cityForm", new thanhPho());modelAndView.addObject("cityForm", new thanhPho());
+        modelAndView.addObject("listCountry", quocGiaRepository.findAll());
         return modelAndView;
     }
 
@@ -86,6 +87,14 @@ public class HomeController {
         }
         ModelAndView modelAndView = new ModelAndView("redirect:/home");
         cityRepository.save(new thanhPho(thanhPho.getId(), thanhPho.getNameCity(), thanhPho.getCountry(), thanhPho.getArea(), thanhPho.getPopulation(), thanhPho.getGDP(), thanhPho.getDescribe()));
+        return modelAndView;
+    }
+
+    @GetMapping("/search")
+    public ModelAndView search(@RequestParam("search") String search){
+        ModelAndView modelAndView = new ModelAndView("home");
+        List<thanhPho> list = cityRepository.findAllByNameCityContains(search);
+        modelAndView.addObject("city",list);
         return modelAndView;
     }
 }

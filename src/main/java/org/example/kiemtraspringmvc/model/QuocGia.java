@@ -14,7 +14,6 @@ public class QuocGia {
 
     public QuocGia() {
     }
-
     public Long getId() {
         return id;
     }
